@@ -4,6 +4,7 @@ local cards = {}
 
 local middle_pos = vmath.vector3(0, -275, 0)
 local card_padding_size = 50
+local max_hand_size = 200
 
 go.property("hand_pos", vmath.vector3())
 
@@ -18,13 +19,18 @@ end
 
 function position_all_cards()
 	local total_no = #cards;
-	local size = total_no * card_padding_size
-	local start_pos = middle_pos.x - size / 2 + card_padding_size * 0.5
+	local current_padding_size = card_padding_size
+
+	if(max_hand_size < total_no * card_padding_size) then
+		current_padding_size = max_hand_size / total_no
+	end
+
+	local start_pos = middle_pos.x - total_no * current_padding_size / 2 + current_padding_size * 0.5
 
 	for i = 1, #cards, 1 do
 		local card = cards[i]
 
-		local pos = vmath.vector3(start_pos + card_padding_size * (i - 1), middle_pos.y, middle_pos.z)
+		local pos = vmath.vector3(start_pos + current_padding_size * (i - 1), middle_pos.y, middle_pos.z)
 		go.set_position(pos, card)
 		go.set(card, "hand_pos", pos)
 	end
