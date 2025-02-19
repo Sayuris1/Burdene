@@ -1,5 +1,6 @@
 [bootstrap]
 main_collection = /main/main.collectionc
+render = /orthographic/render/orthographic.renderc
 
 [script]
 shared_state = 1
@@ -17,4 +18,17 @@ scale_mode = stretch
 
 [project]
 title = Burdene
+dependencies#0 = https://github.com/britzl/defold-orthographic/archive/refs/tags/3.3.2.zip
+dependencies#1 = https://github.com/britzl/defold-input/archive/refs/tags/4.6.2.zip
+
+[physics]
+gravity_y = -1000.0
+scale = 0.6
+max_collision_object_count = 16384
+max_collisions = 16384
+max_contacts = 32768
+world_count = 1
+
+[sprite]
+max_count = 16384
 

@@ -1,2 +1,212 @@
 name: "main"
+instances {
+  id: "camera"
+  prototype: "/orthographic/camera.go"
+}
+instances {
+  id: "ball"
+  prototype: "/prefabs/ball.go"
+  position {
+    x: 17.0
+    y: -11.0
+  }
+  component_properties {
+    id: "ballMovement"
+    properties {
+      id: "speed_x"
+      value: "10000.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "speed_y"
+      value: "1000000.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+}
+instances {
+  id: "card"
+  prototype: "/prefabs/card.go"
+  position {
+    y: -270.0
+  }
+}
 scale_along_z: 0
+embedded_instances {
+  id: "debugger"
+  data: "components {\n"
+  "  id: \"debugger\"\n"
+  "  component: \"/debugger/debugger.script\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "bottom"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 10000.0\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 396.60782\\n"
+  "  data: 10.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    y: -105.0
+  }
+}
+embedded_instances {
+  id: "left"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 10000.0\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 18.569082\\n"
+  "  data: 580.21313\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -398.0
+    y: -105.0
+  }
+}
+embedded_instances {
+  id: "right"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 10000.0\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 18.569082\\n"
+  "  data: 580.21313\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 393.0
+    y: -105.0
+  }
+}
+embedded_instances {
+  id: "top"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.0\\n"
+  "restitution: 10000.0\\n"
+  "group: \\\"wall\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 396.60782\\n"
+  "  data: 10.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    y: 308.0
+  }
+}
+embedded_instances {
+  id: "cursor"
+  data: "components {\n"
+  "  id: \"cursor\"\n"
+  "  component: \"/.defold/assets/in/cursor.script\"\n"
+  "  properties {\n"
+  "    id: \"drag\"\n"
+  "    value: \"false\"\n"
+  "    type: PROPERTY_TYPE_BOOLEAN\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"cursor_controller\"\n"
+  "  component: \"/scripts/cursor_controller.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_KINEMATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"cursor\\\"\\n"
+  "mask: \\\"card\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_SPHERE\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 1\\n"
+  "  }\\n"
+  "  data: 25.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
