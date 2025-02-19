@@ -1,9 +1,33 @@
 local cursor = require "in.cursor"
 
+local cards = {}
+
+local middle_pos = vmath.vector3(0, -275, 0)
+local card_padding_size = 50
+
+go.property("hand_pos", vmath.vector3())
+
 function init(self)
 	self.is_holding = false
 
 	self.hand_pos = go.get_position()
+
+	cards[#cards+1] = msg.url()
+	position_all_cards()
+end
+
+function position_all_cards()
+	local total_no = #cards;
+	local size = total_no * card_padding_size
+	local start_pos = middle_pos.x - size / 2 + card_padding_size * 0.5
+
+	for i = 1, #cards, 1 do
+		local card = cards[i]
+
+		local pos = vmath.vector3(start_pos + card_padding_size * (i - 1), middle_pos.y, middle_pos.z)
+		go.set_position(pos, card)
+		go.set(card, "hand_pos", pos)
+	end
 end
 
 function final(self)
@@ -36,6 +60,7 @@ function on_message(self, message_id, message, sender)
 			go.delete()
 		else
 			go.set_position(self.hand_pos)
+			factory.create("/card_factory#factory")
 		end
 	end
 end

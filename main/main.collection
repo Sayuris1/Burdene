@@ -31,6 +31,10 @@ instances {
     y: -270.0
   }
 }
+instances {
+  id: "card_factory"
+  prototype: "/prefabs/card_factory.go"
+}
 scale_along_z: 0
 embedded_instances {
   id: "debugger"
