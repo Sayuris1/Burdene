@@ -4,27 +4,6 @@ instances {
   prototype: "/orthographic/camera.go"
 }
 instances {
-  id: "ball"
-  prototype: "/prefabs/ball.go"
-  position {
-    x: 17.0
-    y: -11.0
-  }
-  component_properties {
-    id: "ballMovement"
-    properties {
-      id: "speed_x"
-      value: "10000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-    properties {
-      id: "speed_y"
-      value: "1000000.0"
-      type: PROPERTY_TYPE_NUMBER
-    }
-  }
-}
-instances {
   id: "card"
   prototype: "/prefabs/card.go"
   position {
@@ -34,6 +13,30 @@ instances {
 instances {
   id: "card_factory"
   prototype: "/prefabs/card_factory.go"
+}
+instances {
+  id: "card_creator_ball"
+  prototype: "/prefabs/card_creator_ball.go"
+  position {
+    x: -19.0
+    y: 2.0
+  }
+}
+instances {
+  id: "blue_ball"
+  prototype: "/prefabs/blue_ball.go"
+  position {
+    x: 46.0
+    y: 83.0
+  }
+}
+instances {
+  id: "red_ball"
+  prototype: "/prefabs/red_ball.go"
+  position {
+    x: -140.0
+    y: 135.0
+  }
 }
 scale_along_z: 0
 embedded_instances {
@@ -210,6 +213,86 @@ embedded_instances {
   "  }\\n"
   "  data: 25.0\\n"
   "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "card_creator_ball_factory"
+  data: "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/card_creator_ball.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "red"
+  data: "embedded_components {\n"
+  "  id: \"label\"\n"
+  "  type: \"label\"\n"
+  "  data: \"size {\\n"
+  "  x: 128.0\\n"
+  "  y: 32.0\\n"
+  "}\\n"
+  "color {\\n"
+  "  y: 0.0\\n"
+  "  z: 0.0\\n"
+  "}\\n"
+  "text: \\\"100\\\"\\n"
+  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 422.0
+    y: 273.0
+  }
+}
+embedded_instances {
+  id: "blue"
+  data: "embedded_components {\n"
+  "  id: \"label\"\n"
+  "  type: \"label\"\n"
+  "  data: \"size {\\n"
+  "  x: 128.0\\n"
+  "  y: 32.0\\n"
+  "}\\n"
+  "color {\\n"
+  "  x: 0.0\\n"
+  "}\\n"
+  "text: \\\"100\\\"\\n"
+  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: -128.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 422.0
+    y: 273.0
+  }
+}
+embedded_instances {
+  id: "red_ball_factory"
+  data: "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/red_ball.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "blue_ball_factory"
+  data: "embedded_components {\n"
+  "  id: \"factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/prefabs/blue_ball.go\\\"\\n"
   "\"\n"
   "}\n"
   ""

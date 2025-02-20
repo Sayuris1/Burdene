@@ -1,24 +1,36 @@
 local cursor = require "in.cursor"
 
 local cards = {}
+local cards_table_size = 0
 
 local middle_pos = vmath.vector3(0, -275, 0)
 local card_padding_size = 50
-local max_hand_size = 200
+local max_hand_size = 800
+
+local max_usable_card_no = 24
 
 go.property("hand_pos", vmath.vector3())
+go.property("card_type", 0)
 
 function init(self)
 	self.is_holding = false
 
+	if(max_usable_card_no < cards_table_size) then
+		go.set_position(vmath.vector3(math.random(-600, 600), math.random(-250, 250), 0))
+		self.hand_pos = go.get_position()
+		return;
+	end
+
 	self.hand_pos = go.get_position()
 
-	cards[#cards+1] = msg.url()
+	cards_table_size = cards_table_size + 1
+	cards[go.get_id()] = {index = cards_table_size, url = msg.url()}
+
 	position_all_cards()
 end
 
 function position_all_cards()
-	local total_no = #cards;
+	local total_no = cards_table_size;
 	local current_padding_size = card_padding_size
 
 	if(max_hand_size < total_no * card_padding_size) then
@@ -27,19 +39,19 @@ function position_all_cards()
 
 	local start_pos = middle_pos.x - total_no * current_padding_size / 2 + current_padding_size * 0.5
 
-	for i = 1, #cards, 1 do
-		local card = cards[i]
-
+	local i = 0
+	for card, value in pairs(cards) do
+		i = i + 1
 		local pos = vmath.vector3(start_pos + current_padding_size * (i - 1), middle_pos.y, middle_pos.z)
 		go.set_position(pos, card)
-		go.set(card, "hand_pos", pos)
+		go.set(value.url, "hand_pos", pos)
 	end
 end
 
 function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	cards_table_size = cards_table_size - 1
+	cards[go.get_id()] = nil
+	position_all_cards()
 end
 
 function update(self, dt)
@@ -48,43 +60,22 @@ function update(self, dt)
 	end
 end
 
-function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 function on_message(self, message_id, message, sender)
 	if message_id == cursor.PRESSED then
 		self.is_holding = true
 	elseif message_id == cursor.RELEASED then
 		self.is_holding = false
 		if go.get_position().y > -100 then
+			if(self.card_type == 0) then
+				factory.create("/card_creator_ball_factory#factory")
+			elseif(self.card_type == 1) then
+				factory.create("/blue_ball_factory#factory")
+			else
+				factory.create("/red_ball_factory#factory")
+			end
 			go.delete()
 		else
 			go.set_position(self.hand_pos)
-			factory.create("/card_factory#factory")
 		end
 	end
-end
-
-function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
-end
-
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
 end
