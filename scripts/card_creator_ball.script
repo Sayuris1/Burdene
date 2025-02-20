@@ -33,7 +33,6 @@ function on_message(self, message_id, message, sender)
 			label.set_text("/blue#label", Blue_Count)
 
 			local rnd = math.random(100)
-			pprint(rnd)
 			if rnd <= 10 then
 				factory.create("/card_factory#card_factory")
 			elseif rnd <= 35 then

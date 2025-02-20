@@ -32,3 +32,6 @@ world_count = 1
 [sprite]
 max_count = 16384
 
+[label]
+max_count = 1024
+
